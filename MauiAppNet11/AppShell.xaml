@@ -5,29 +5,37 @@
     Shell.FlyoutBehavior="Flyout"
     Title="MauiAppNet11">
 
-    <ShellContent
-        Title="Dashboard"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:MainPage}"
-        Route="main"
-        SemanticProperties.Description="Dashboard"
-        SemanticProperties.Hint="Navigate to dashboard"/>
+    <FlyoutItem Title="Workspace" FlyoutDisplayOptions="AsSingleItem">
+        <Tab Title="Dashboard" Icon="{StaticResource IconDashboard}">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="main"
+                SemanticProperties.Description="Dashboard"
+                SemanticProperties.Hint="Navigate to dashboard" />
+        </Tab>
 
-    <ShellContent
-        Title="Projects"
-        Icon="{StaticResource IconProjects}"
-        ContentTemplate="{DataTemplate pages:ProjectListPage}"
-        Route="projects"
-        SemanticProperties.Description="Projects"
-        SemanticProperties.Hint="Navigate to projects"/>
+        <Tab x:Name="ProjectsTab"
+             Title="Projects"
+             Icon="{StaticResource IconProjects}"
+             BadgeColor="#D32F2F">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:ProjectListPage}"
+                Route="projects"
+                SemanticProperties.Description="Projects"
+                SemanticProperties.Hint="Navigate to projects" />
+        </Tab>
 
-    <ShellContent
-        Title="Manage Meta"
-        Icon="{StaticResource IconMeta}"
-        ContentTemplate="{DataTemplate pages:ManageMetaPage}"
-        Route="manage"
-        SemanticProperties.Description="Manage Meta"
-        SemanticProperties.Hint="Navigate to manage meta"/>
+        <Tab Title="Manage Meta"
+             Icon="{StaticResource IconMeta}"
+             BadgeText=""
+             BadgeColor="#D32F2F">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:ManageMetaPage}"
+                Route="manage"
+                SemanticProperties.Description="Manage Meta"
+                SemanticProperties.Hint="Navigate to manage meta" />
+        </Tab>
+    </FlyoutItem>
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">

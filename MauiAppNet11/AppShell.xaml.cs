@@ -1,16 +1,29 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
+using MauiAppNet11.PageModels;
 using Font = Microsoft.Maui.Font;
 
 namespace MauiAppNet11
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        private readonly ProjectListPageModel _projectListPageModel;
+
+        public AppShell(ProjectListPageModel projectListPageModel)
         {
             InitializeComponent();
+            _projectListPageModel = projectListPageModel;
+            ProjectsTab.BadgeText = _projectListPageModel.Projects.Count.ToString();
+            _projectListPageModel.PropertyChanged += ProjectListPageModel_PropertyChanged;
+
             var currentTheme = Application.Current!.RequestedTheme;
             ThemeSegmentedControl.SelectedIndex = currentTheme == AppTheme.Light ? 0 : 1;
+        }
+
+        private void ProjectListPageModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ProjectListPageModel.Projects))
+                ProjectsTab.BadgeText = _projectListPageModel.Projects.Count.ToString();
         }
         public static async Task DisplaySnackbarAsync(string message)
         {
